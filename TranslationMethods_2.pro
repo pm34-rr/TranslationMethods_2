@@ -6,11 +6,19 @@ CONFIG -= qt
 SOURCES += main.cpp \
     Tables/ChangeableTable.cpp \
     Tables/Lexeme.cpp \
-    Tables/PermamentTable.cpp
+    Tables/PermamentTable.cpp \
+    LexicalAnalyzer.cpp \
+    TableStorage.cpp \
+    Translator.cpp \
+    Token.cpp
 
 HEADERS += \
     Tables/ChangeableTable.h \
     Tables/Lexeme.h \
-    Tables/PermamentTable.h
+    Tables/PermamentTable.h \
+    LexicalAnalyzer.h \
+    TableStorage.h \
+    Translator.h \
+    Token.h
 
 OBJECTS_DIR = objects

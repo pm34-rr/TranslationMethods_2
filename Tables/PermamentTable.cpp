@@ -33,6 +33,11 @@ void PermamentTable::loadFromFile( const string & path )
 	finalize();
 }
 
+const string & PermamentTable::name( uint pos ) const
+{
+	return _table[pos];
+}
+
 int PermamentTable::find( const string & elem ) const
 {
 	auto it = std::find( _table.begin(), _table.end(), elem );
