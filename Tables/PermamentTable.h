@@ -10,6 +10,7 @@ public:
 
 	void add( const std::string & elem );
 	void finalize();
+	void loadFromFile( const std::string & path );
 
 	int  find( const std::string & elem ) const;
 
