@@ -1,5 +1,13 @@
 #include "Token.h"
 
+Token::Token( TokenType t, uint row, uint pos ):
+	tokenType( t ),
+	rowNumber( row ),
+	posInRow( pos )
+{
+
+}
+
 std::ifstream & operator>>( std::ifstream & input, Token & token )
 {
 	char c;
@@ -12,12 +20,4 @@ std::ofstream & operator<<( std::ofstream & output, const Token & token )
 {
 	output << '(' << (int)token.tokenType << ',' << token.rowNumber << ',' << token.posInRow << ')';
 	return output;
-}
-
-Token::Token( TokenType t, uint row, uint pos ):
-	tokenType( t ),
-	rowNumber( row ),
-	posInRow( pos )
-{
-
 }

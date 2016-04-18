@@ -31,6 +31,21 @@ size_t Lexeme::arraySize() const
 	return _initialize.size();
 }
 
+void Lexeme::setType( Type t )
+{
+	_type = t;
+}
+
+void Lexeme::setArray()
+{
+	_isArray = true;
+}
+
+void Lexeme::setArraySize( size_t size )
+{
+	_initialize.resize( size, 0 );
+}
+
 void Lexeme::setInitialized( size_t num )
 {
 	if ( !isIndexCorrect( num ) )

@@ -1,5 +1,8 @@
 #include "TableStorage.h"
 
+#include "Tables/ChangeableTable.h"
+#include "Tables/PermamentTable.h"
+
 TableStorage * TableStorage::_storage = nullptr;
 
 using namespace std;
@@ -12,9 +15,39 @@ TableStorage & TableStorage::getInstance()
 	return *_storage;
 }
 
-int TableStorage::findLexemByName( const string & lexem ) const
+PermamentTable * TableStorage::getKeyWordsTable() const
 {
+	return _keyWords;
+}
 
+PermamentTable * TableStorage::getSeparatorsTable() const
+{
+	return _separators;
+}
+
+PermamentTable * TableStorage::getOperationsTable() const
+{
+	return _operations;
+}
+
+ChangeableTable * TableStorage::getIdentificatorsTable() const
+{
+	return _ids;
+}
+
+ChangeableTable * TableStorage::getConstsTable() const
+{
+	return _consts;
+}
+
+std::pair<int, int> TableStorage::findLexemByName( const string & lexem ) const
+{
+	return _ids->find( lexem );
+}
+
+std::pair<int,int> TableStorage::findConstByName( const string & name ) const
+{
+	return _consts->find( name );
 }
 
 int TableStorage::findSeparatorByName( const string & sep ) const
@@ -34,7 +67,7 @@ int TableStorage::findOperationByName( const string & op ) const
 
 const string & TableStorage::findLexemByToken( const Token & token ) const
 {
-
+	return _ids->name( token.rowNumber, token.posInRow );
 }
 
 const string & TableStorage::findSeparatorByToken( const Token & token ) const
@@ -52,9 +85,29 @@ const string & TableStorage::findOperationByToken( const Token & token ) const
 	return _operations->name( token.rowNumber );
 }
 
+const string & TableStorage::findConstByToken( const Token & token ) const
+{
+	return _consts->name( token.rowNumber, token.posInRow );
+}
+
+void TableStorage::printIdentificatorTable() const
+{
+	_ids->printTable();
+}
+
+void TableStorage::printConstTable() const
+{
+	_consts->printTable();
+}
+
+
+
 TableStorage::TableStorage()
 {
 	loadPermamentTables();
+
+	_ids	= new ChangeableTable;
+	_consts = new ChangeableTable;
 }
 
 void TableStorage::loadPermamentTables()
